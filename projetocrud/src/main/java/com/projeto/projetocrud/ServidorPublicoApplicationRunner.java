@@ -7,10 +7,15 @@ import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Configuration;
 
 import com.projeto.projetocrud.model.ServidorPublico;
 import com.projeto.projetocrud.service.ServidorPublicoService;
 
+import jakarta.annotation.PostConstruct;
+
+
+@Configuration
 public class ServidorPublicoApplicationRunner implements CommandLineRunner {
 
 	private ServidorPublicoService servidorService;
@@ -22,6 +27,7 @@ public class ServidorPublicoApplicationRunner implements CommandLineRunner {
 	}
 	
 	//Método 1 - Chamar Service - listAll()
+	@PostConstruct
 	public void listAll() {
 		List<ServidorPublico> servidorespublicos = servidorService.listAll();
 		
@@ -42,6 +48,7 @@ public class ServidorPublicoApplicationRunner implements CommandLineRunner {
 	}
 	
 	//Método 2 - receber matrícula
+	@PostConstruct
 	public void listByMatricula() {
 		long matricula = Long.parseLong(JOptionPane.showInputDialog("Digite matrícula desejada: "));
 		Optional<ServidorPublico> servidorEncontrado = servidorService.listByMatricula(matricula);
