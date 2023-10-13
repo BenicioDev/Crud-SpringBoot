@@ -60,7 +60,8 @@ public class ServidorPublicoApplicationRunner implements CommandLineRunner {
 			System.out.println(servidorEncontrado.get().foto());
 			System.out.println(servidorEncontrado.get().orgao());
 		} else {
-			System.out.print("Matrícula inexistente");
+			JOptionPane.showMessageDialog(null, "Matrícula inexistente.");
+			//System.out.print("Matrícula inexistente");
 		}
 	}
 	
