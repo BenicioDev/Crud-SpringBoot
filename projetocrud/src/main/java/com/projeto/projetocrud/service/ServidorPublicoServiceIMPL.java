@@ -20,14 +20,14 @@ public class ServidorPublicoServiceIMPL implements ServidorPublicoService {
 		
 		try {
 		
-		//Pegar lista 
+		//Criar lista - VAZIA
 		TypeReference<List<ServidorPublico>> typeref = 
 				new TypeReference<List<ServidorPublico>>(){}; 
 	
-		//Abrir arquivo
+		//Abrir arquivo JSON
 		InputStream inputstream = TypeReference.class.getResourceAsStream(SERVIDOR);
 		
-		//Buscar lista
+		//Buscar 
 		List<ServidorPublico> servidorespublicos = new ObjectMapper().readValue(inputstream, typeref);
 		
 		return servidorespublicos;
@@ -45,20 +45,22 @@ public class ServidorPublicoServiceIMPL implements ServidorPublicoService {
 	public Optional<ServidorPublico> listByMatricula(long matricula) {
 		try {
 			
-			//Pegar lista 
+			//Criar lista 
 			TypeReference<List<ServidorPublico>> typeref = 
 					new TypeReference<List<ServidorPublico>>(){}; 
 		
-			//Abrir arquivo
+			//Recebendo arquivo JSON - Mapear
 			InputStream inputstream = TypeReference.class.getResourceAsStream(SERVIDOR);
 			
 			//Buscar lista
 			List<ServidorPublico> servidorespublicos = new ObjectMapper().readValue(inputstream, typeref);
 			
-				Optional<ServidorPublico> servidorEncontrado = servidorespublicos.stream().filter(
-						servidor -> servidor.matricula().equals(matricula)).findFirst();
+			//Buscar matrícula solicitada
+			Optional<ServidorPublico> servidorEncontrado = servidorespublicos.stream().filter(
+					//Condição de chamar matricula como valor que foi passado
+					servidor -> servidor.matricula().equals(matricula)).findFirst();
 						
-					
+				return servidorEncontrado;	
 			} 
 			catch (Exception e)
 			{
